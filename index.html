@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Morse code</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      .popup
+      {
+      	border-radius:5px;
+      	background-color:black;
+      	color:white;
+      	padding:5px;
+      }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+      }
+
+      .tooltip .tooltiptext {
+        left:102px;
+        visibility: hidden;
+        width: 550px;
+        background-color: black;
+        color: #fff;
+        border-radius: 6px;
+        padding: 10px 10px 10px 10px;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 100;
+        <!-- text-align:center; -->
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      }
+      /*mathstyle.css*/
+      span.frac {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      }
+      span.frac > sup, span.frac > sub {
+      display: block;
+      font: inherit;
+      padding: 0 0.3em;
+      }
+      span.frac > sup {border-bottom: 0.08em solid;}
+      span.frac > span {display: none;}
+
+
+      #simscreen
+      {
+      	position: relative;
+      	left:0px;
+      	top:0px;
+      	height: 600px;
+      	width:800px;
+      	border:solid 1px;
+      }
+
+      #title{
+      	position:relative;
+      	left: 0px;
+      	top: 0px;
+      	height:40px;
+      	font-size: 24px;
+      	text-align:center;
+      	background-color: black;
+      	font-family: verdana;
+      	color: White;
+      	text-transform: uppercase;
+      } #output {
+                  font-size: 24px;
+              }
+
+
+      #title h3
+      {
+          font-size: 24px;
+      	padding-top:2px;
+      	margin:0px;
+      }
+
+      .simsubscreen
+      {
+      	position:absolute;
+      	left:50px;
+      	top:50px;
+      	height:530px;
+      	width:745px;
+      }
+      .simssubscreen
+      {
+      	position:absolute;
+      	left:50px;
+      	top:50px;
+      	height:530px;
+      	width:745px;
+      }
+      .incanvas
+      {
+      	margin:5px 0 0 1px;
+      	padding:0;
+      }
+
+      #nextButton
+      {
+      	position:absolute;
+      	left:750px;
+      	top:530px;
+      	cursor:pointer;
+      }
+
+      .circlebg
+      {
+      	border-radius:100%;
+      	font-size:25px;
+      	color:#fff;
+      	text-align:center;
+      	background:#000
+      }
+
+      .steptext
+      {
+      	display:inline;
+      	font-size:14px;
+      }
+
+      #copyright{
+      	position: absolute;
+      	left:280px;
+      	top: 580px;
+      	font-size:12px
+      }
+      .error {
+                  color: red;text-align: center;
+                }
+                .output
+                {
+                  style="font-weight: bolder;"
+                }
+                #displayButton, #convert-to-morse {
+                  display: inline-block;
+                  vertical-align: middle;
+              }
+
+              #convert-to-morse {
+                  font-size: 14px;
+                  background-color: black;
+                  padding: 16px 10px;
+                  color: white;
+                  width: 60px;
+                  height: 60px;
+              }
+              input[type="range"] {
+                  width: 40%;
+              }
+    </style>
+  </head>
+
+  <body style="margin: 0; font-family: verdana">
+    <div id="simscreen">
+      <div id="title"><h3>Exploring Morse Code: Numbers</h3></div>
+
+      <div class="simsubscreen" id="canvas0">
+        <h4 class="incanvas">Objective:</h4>
+        <p class="incanvas" style="font-size: 14px"></p>
+        <p>
+          To acquire the ability to receive and understand Morse code
+          transmissions of numbers.
+        </p>
+        &nbsp;
+        <h4 class="incanvas">Description:</h4>
+        <p style="text-align: justify; width: 700px">
+          Morse code is a method of transmitting text information as a series of
+          on-off tones, lights, or clicks that can be directly understood by a
+          skilled listener or observer without special equipment. It is a system
+          of dots and dashes that can be used to send messages over long
+          distances. It was originally used by telegraph operators to send
+          messages using electrical pulses. Radio communicators later adapted
+          the code to use it as an auditory language. <br /><br /><br />
+          Morse code can be used to send messages using Wires, Radios, Sound,
+          Light. Messages can be sent by Tapping, Drumming, Buzzing, Clicking,
+          or flashing light. Morse code is still used today by many ham radio
+          operators. It's a recognised mode of communication in the amateur
+          radio community, and some operators enjoy the challenge and efficiency
+          of using Morse code for long-distance communication. It is also used
+          in emergency signals and in technology to help disabled people
+          communicate.
+        </p>
+      </div>
+
+      <div class="simsubscreen" id="canvas1" style="visibility: hidden">
+        <strong class="incanvas">STEP</strong>
+        <span class="circlebg">&nbsp;1&nbsp;</span>
+        <p class="steptext">&nbsp;Select the number from 0-9</p>
+        <br /><br /><br />
+        <br /><br />
+
+        <label for="textInput"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select
+          the number:
+        </label>
+        <input
+          type="number"
+          id="textInput"
+          name="textInput"
+          min="0"
+          max="9"
+          oninput="displayNumber();displayNumber1()"
+        />
+        <br /><br /><br /><br />
+        <br /><br />
+        <label for="slider"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label
+        >
+        <!--<input type="range" id="slider" min="0" max="9" step="1">-->
+
+        <input
+          type="range"
+          min="0"
+          max="9"
+          id="slider"
+          min="0"
+          max="9"
+          step="1"
+        />
+        <p style="text-align: left; font-size: small">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9
+        </p>
+        <br /><br />
+        <div class="error" id="errorText"></div>
+        <br />
+
+        <script>
+          const slider = document.getElementById("slider");
+          document.getElementById("slider").value = "0";
+          const textInput = document.getElementById("textInput");
+          textInput.value = "0";
+
+          const errorText = document.getElementById("errorText");
+
+          slider.addEventListener("input", function () {
+            textInput.value = slider.value;
+          });
+
+          textInput.addEventListener("input", function () {
+            const inputValue = textInput.value;
+
+            if (isNaN(inputValue) || inputValue < 0 || inputValue > 9) {
+              errorText.textContent =
+                "Error: Please enter a valid number between 0 and 9.";
+            } else {
+              errorText.textContent = "";
+              slider.value = inputValue;
+            }
+          });
+
+          textInput.addEventListener("keydown", function (event) {
+            const key = event.key;
+            if (
+              !/^[0-9]$/.test(key) &&
+              key !== "Backspace" &&
+              key !== "Enter" &&
+              !(event.ctrlKey && key === "Enter")
+            ) {
+              event.preventDefault();
+              errorText.textContent = "Error: Only numeric values are allowed.";
+            } else {
+              errorText.textContent = "";
+            }
+          });
+        </script>
+        <button style="display: block; margin-left: 300px" onclick="navNext()">
+          Submit
+        </button>
+
+        <br />
+      </div>
+
+      <div class="simsubscreen" id="canvas2" style="visibility: hidden">
+        <strong class="incanvas">STEP</strong>
+        <span class="circlebg">&nbsp;2&nbsp;</span>
+        <p class="steptext">
+          &nbsp; Click on the play button to observe the Morse code equivalent
+          of the number entered.
+        </p>
+        <br /><br /><br />
+        <div style="text-align: center">
+          <p id="displayArea"></p>
+        </div>
+
+        <script>
+          function displayNumber() {
+            var numberValue = document.getElementById("textInput").value;
+            document.getElementById("displayArea").textContent =
+              "Selected number: " + numberValue;
+          }
+          slider.addEventListener("input", function () {
+            textInput.value = slider.value;
+            displayNumber();
+          });
+          document.getElementById("displayArea").textContent =
+            "Selected number: 0";
+        </script>
+
+        <br /><br /><br />
+        <div style="display: flex; align-items: center">
+          <button
+            style="
+              width: 60px;
+              height: 60px;
+              border-width: 4px;
+              font-size: 36px;
+              margin-right: 50px;
+              margin-left: 100px;
+              border-radius: 12px;
+            "
+            id="displayButton"
+          ></button>
+
+          <button
+            style="
+              border-radius: 50%;
+              background-color: rgb(224, 223, 223);
+              color: rgb(32, 32, 32);
+              margin-left: 100px;
+              padding: 15px 15px;
+              font-weight: bold;
+            "
+            onclick="convertAndPlay()"
+            id="playButton"
+          >
+            <i class="fa fa-play" style="font-size: 18px"></i><br />Play
+          </button>
+
+          <span
+            id="output"
+            style="font-size: 48px; margin-right: 50px; margin-left: 100px"
+          ></span>
+        </div>
+        <p style="margin-left: 290px; font-size: 16px">Keep audio on</p>
+
+        <script>
+          var numToMorse = {
+            1: ".----",
+            2: "..---",
+            3: "...--",
+            4: "....-",
+            5: ".....",
+            6: "-....",
+            7: "--...",
+            8: "---..",
+            9: "----.",
+            0: "-----",
+          };
+
+          var morseCode = "";
+          var isPlaying = false;
+          function convertAndPlay() {
+            if (isPlaying) {
+              return; // Do nothing if already playing
+            }
+
+            isPlaying = true;
+            var numbers = document.getElementById("textInput").value.split("");
+            var output = document.getElementById("output");
+            output.innerHTML = "";
+
+            morseCode = numbers.map((num) => numToMorse[num]).join("");
+            var context = new AudioContext();
+
+            morseCode.split("").forEach(function (symbol, index) {
+              setTimeout(function () {
+                output.innerHTML += symbol;
+
+                var oscillator = context.createOscillator();
+                oscillator.frequency.value = 600;
+                oscillator.connect(context.destination);
+                oscillator.start();
+
+                if (symbol === ".") {
+                  setTimeout(function () {
+                    oscillator.stop();
+                  }, 100);
+                } else if (symbol === "-") {
+                  setTimeout(function () {
+                    oscillator.stop();
+                  }, 300);
+                }
+
+                // Enable the play button when playback is finished
+                if (index === morseCode.length - 1) {
+                  setTimeout(function () {
+                    isPlaying = false;
+                    document.getElementById("playButton").disabled = false;
+                    document.getElementById("reset").style.visibility =
+                      "visible";
+                  }, (index + 1) * 800);
+                }
+              }, index * 800);
+            });
+
+            // Disable the play button during playback
+            document.getElementById("playButton").disabled = true;
+          }
+
+          function displayNumber1() {
+            var numberValue = document.getElementById("textInput").value;
+            var displayButton = document.getElementById("displayButton");
+            displayButton.textContent = " " + numberValue;
+          }
+          slider.addEventListener("input", function () {
+            textInput.value = slider.value;
+            displayNumber1();
+          });
+          document.getElementById("displayButton").textContent = " 0";
+        </script>
+        <br /><br /><br /><br /><br /><br /><br />
+        <div id="reset" style="visibility: hidden; margin-left: 320px">
+          <button
+            onclick="resetExperiment()"
+            style="
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              background-color: rgb(224, 223, 223);
+              color: rgb(32, 32, 32);
+              margin-left: -5px;
+              padding: 8px 8px;
+              font-size: 10px;
+            "
+          >
+            <i class="material-icons">repeat</i>Repeat
+          </button>
+        </div>
+      </div>
+
+      <div id="nav">
+        <img
+          id="nextButton"
+          onclick="navNext()"
+          src="Next.png"
+          style="visibility: 
+    <%= simsubscreennum !== 2 ? 'visible' : 'hidden' %>;"
+        />
+      </div>
+
+      <div id="copyright">
+        &copy; EMBRACE - NITK
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+      </div>
+    </div>
+    <script>
+      let simsubscreennum = 0;
+      let temp = 0;
+      function navNext() {
+        for (temp = 0; temp < 2; temp++) {
+          document.getElementById("canvas" + temp).style.visibility = "hidden";
+        }
+        simsubscreennum += 1;
+        document.getElementById("canvas" + simsubscreennum).style.visibility =
+          "visible";
+        document.getElementById("nextButton").style.visibility = "hidden";
+        magic();
+      }
+
+      function navBack() {
+        simsubscreennum -= 1;
+        document.getElementById(
+          "canvas" + (simsubscreennum + 1)
+        ).style.visibility = "hidden";
+        document.getElementById("canvas" + simsubscreennum).style.visibility =
+          "visible";
+
+        if (simsubscreennum === 0) {
+          document.getElementById("nextButton").style.visibility = "visible";
+        } else {
+          document.getElementById("nextButton").style.visibility = "hidden";
+        }
+
+        magic();
+      }
+
+      //
+
+      function magic() {
+        // if(simsubscreennum==1)
+        // {
+        // 	blinkArrow(520,270,360,40);
+        // }
+      }
+      function resetExperiment() {
+        document.getElementById("reset").style.visibility = "hidden";
+        // Reset input fields
+        document.getElementById("textInput").value = "0";
+        //reset slider
+        document.getElementById("slider").value = "0";
+        // Clear error messages
+        document.getElementById("errorText").textContent = "";
+
+        // Clear displayed content
+        document.getElementById("displayArea").textContent = "";
+        document.getElementById("output").textContent = "";
+
+        // Return to canvas 1
+        simsubscreennum = 1;
+        for (let temp = 0; temp < 3; temp++) {
+          document.getElementById("canvas" + temp).style.visibility = "hidden";
+        }
+        document.getElementById("canvas1").style.visibility = "visible";
+
+        // Show the "Next" button on canvas 1
+        document.getElementById("nextButton").style.visibility = "hidden";
+        document.getElementById("displayButton").textContent = " 0";
+        document.getElementById("displayArea").textContent =
+          "Selected number: 0";
+      }
+    </script>
+  </body>
+</html>
