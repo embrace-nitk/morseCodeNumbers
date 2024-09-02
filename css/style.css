@@ -1,8 +1,8 @@
 .popup {
-	border-radius:5px;
-	background-color:black;
-	color:white;
-	padding:5px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  padding: 5px;
 }
 
 .tooltip {
@@ -12,7 +12,7 @@
 }
 
 .tooltip .tooltiptext {
-  left:102px;
+  left: 102px;
   visibility: hidden;
   width: 550px;
   background-color: black;
@@ -25,115 +25,125 @@
   z-index: 100;
 }
 
-/*mathstyle.css*/  
+/*mathstyle.css*/
 span.frac {
-display: inline-block;
-text-align: center;
-vertical-align: middle;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
 }
-span.frac > sup, span.frac > sub {
-display: block;
-font: inherit;
-padding: 0 0.3em;
+span.frac > sup,
+span.frac > sub {
+  display: block;
+  font: inherit;
+  padding: 0 0.3em;
 }
-span.frac > sup {border-bottom: 0.08em solid;}
-span.frac > span {display: none;}
-    
-	
+span.frac > sup {
+  border-bottom: 0.08em solid;
+}
+span.frac > span {
+  display: none;
+}
+
 #simscreen {
-	position: relative;
-	left:0px;
-	top:0px;
-	height: 600px; 
-	width:800px;
-	border:solid 1px;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  height: 600px;
+  width: 800px;
+  border: solid 1px;
 }
 
 #title {
-	position:relative;
-	left: 0px;
-	top: 0px;
-	height:40px;
-	font-size: 24px;
-	text-align:center;
-	background-color: black;
-	font-family: verdana;
-	color: White;
-	text-transform: uppercase; 
+  position: relative;
+  left: 0px;
+  top: 0px;
+  height: 40px;
+  font-size: 24px;
+  text-align: center;
+  background-color: black;
+  font-family: verdana;
+  color: White;
+  text-transform: uppercase;
 }
 
 #title h3 {
-    font-size: 24px;
-	padding-top:2px;
-	margin:0px;
-}	
+  font-size: 24px;
+  padding-top: 2px;
+  margin: 0px;
+}
 
 .simsubscreen {
-	position:absolute;
-	left:50px;
-	top:50px;
-	height:530px;
-	width:745px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  height: 530px;
+  width: 745px;
 }
 
 .simssubscreen {
-	position:absolute;
-	left:50px;
-	top:50px;
-	height:530px;
-	width:745px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  height: 530px;
+  width: 745px;
 }
 
 .incanvas {
-	margin:5px 0 0 1px;
-	padding:0;
+  margin: 5px 0 0 1px;
+  padding: 0;
 }
 
 #nextButton {
-	position:absolute;
-	left:750px;
-	top:530px;
-	cursor:pointer;
+  position: absolute;
+  left: 750px;
+  top: 530px;
+  cursor: pointer;
 }
 
 .circlebg {
-	border-radius:100%;
-	font-size:25px;
-	color:#fff;
-	text-align:center;
-	background:#000
+  border-radius: 100%;
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  background: #000;
 }
 
 .steptext {
-	display:inline-block; 
-	font-size:14px; 
+  display: inline-block;
+  font-size: 14px;
 }
 
-#copyright{
-	position:absolute; 
-	left:-50%; 
-	top:-580%; 
-	font-size:-12%; 
+#copyright {
+  position: absolute;
+  left: 50px;
+  top: 580px;
+  font-size: 12px;
 }
 .error {
-    color:red; 
+  color: red;
 }
 .output {
-    font-weight:bolder; 
+  font-weight: bolder;
 }
-#displayButton, #convert-to-morse {
-    display:inline-block; 
-    vertical-align:center; 
+#displayButton,
+#convert-to-morse {
+  display: inline-block;
+  vertical-align: center;
 }
 
 #convert-to-morse {
-    font-size:-14%; 
-    background-color:black; 
-    padding:-16% -10%; 
-    color:white; 
-    width:-60%; 
-    height:-60%; 
+  font-size: -14%;
+  background-color: black;
+  padding: -16% -10%;
+  color: white;
+  width: -60%;
+  height: -60%;
 }
 input[type="range"] {
-    width:-40%; 
+  width: -40%;
+}
+
+.cp {
+  font-size: 16px;
+  font-weight: 900;
 }
